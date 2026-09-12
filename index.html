@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b4f71" />
+    <meta name="description" content="Tính lệch dòng và điện trở cuộn dây động cơ ba pha." />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icon-192.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Etools</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <div class="brand-mark"><img src="icon-192.png" alt="Sơn Tùng EVN" /></div>
+        <div>
+          <p class="eyebrow">Sơn Tùng</p>
+          <h1>Tính toán Điện⚡</h1>
+          <p class="subtitle">Tính lệch dòng, lệch trở và các thành phần đối xứng 🕷</p>
+        </div>
+      </header>
+
+    
+
+      <a class="tool-launch" href="phasor.html">
+        <span class="tool-launch-icon" aria-hidden="true">∠</span>
+        <span><strong>Tính I0 I1 I2</strong></span>
+        <span aria-hidden="true">🔜</span>
+      </a>
+
+      <nav class="mode-tabs" aria-label="Chọn phép tính">
+        <button class="tab is-active" type="button" data-target="current-panel" aria-selected="true">Lệch dòng</button>
+        <button class="tab" type="button" data-target="resistance-panel" aria-selected="false">Lệch trở</button>
+      </nav>
+
+      <section id="current-panel" class="calculator-panel is-active" aria-labelledby="current-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="current-title">Nhập dòng 3 pha</h2>
+          </div>
+          <div class="unit-pill">A</div>
+        </div>
+
+        <div class="input-grid">
+          <label class="input-card" for="current-l1">
+            <span>Pha A</span>
+            <input id="current-l1" inputmode="decimal" autocomplete="off" placeholder="" aria-describedby="current-help" />
+          </label>
+          <label class="input-card" for="current-l2">
+            <span>Pha B</span>
+            <input id="current-l2" inputmode="decimal" autocomplete="off" placeholder="" aria-describedby="current-help" />
+          </label>
+          <label class="input-card" for="current-l3">
+            <span>Pha C</span>
+            <input id="current-l3" inputmode="decimal" autocomplete="off" placeholder="" aria-describedby="current-help" />
+          </label>
+        </div>
+        <p id="current-help" class="field-help">Dùng dấu phẩy hoặc dấu chấm cho phần thập phân.</p>
+
+        <div class="threshold-row">
+          <label for="current-limit">Ngưỡng cảnh báo lệch dòng</label>
+          <div class="compact-input"><input id="current-limit" inputmode="decimal" value="10" /><span>%</span></div>
+        </div>
+
+        <div id="current-results" class="result-card empty" aria-live="polite">
+          <p>Nhập đủ 3 giá trị để xem kết quả.</p>
+        </div>
+      </section>
+
+      <section id="resistance-panel" class="calculator-panel" aria-labelledby="resistance-title" hidden>
+        <div class="section-heading">
+          <div>
+            <h2 id="resistance-title">Điện trở cuộn dây</h2>
+            <p>Nhập ba giá trị đo giữa các đầu dây.</p>
+          </div>
+          <div class="unit-pill">Ω</div>
+        </div>
+
+        <div class="input-grid">
+          <label class="input-card" for="resistance-u-v">
+            <span>U – V</span>
+            <input id="resistance-u-v" inputmode="decimal" autocomplete="off" placeholder="" aria-describedby="resistance-help" />
+          </label>
+          <label class="input-card" for="resistance-v-w">
+            <span>V – W</span>
+            <input id="resistance-v-w" inputmode="decimal" autocomplete="off" placeholder="" aria-describedby="resistance-help" />
+          </label>
+          <label class="input-card" for="resistance-w-u">
+            <span>W – U</span>
+            <input id="resistance-w-u" inputmode="decimal" autocomplete="off" placeholder="" aria-describedby="resistance-help" />
+          </label>
+        </div>
+        <p id="resistance-help" class="field-help">Dùng cùng đơn vị cho cả ba phép đo (Ω hoặc mΩ).</p>
+
+        
+
+        <div class="threshold-row">
+          <label for="resistance-limit">Ngưỡng cảnh báo lệch trở</label>
+          <div class="compact-input"><input id="resistance-limit" inputmode="decimal" value="1" /><span>%</span></div>
+        </div>
+
+        <div id="resistance-results" class="result-card empty" aria-live="polite">
+          <p>Nhập đủ 3 giá trị để xem kết quả.</p>
+        </div>
+      </section>
+
+  
+
+      <div class="action-row">
+        <button id="share-button" class="button secondary" type="button" disabled>Chia sẻ kết quả</button>
+        <button id="reset-button" class="button ghost" type="button">Xóa số liệu</button>
+      </div>
+
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>

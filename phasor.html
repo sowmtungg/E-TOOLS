@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b4f71" />
+    <meta name="description" content="Chuyển đổi phasor dòng điện ba pha và tính thành phần đối xứng I0, I1, I2." />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icon-192.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="phasor.css" />
+    <title>Sơn Tùng EVN — Phasor</title>
+  </head>
+  <body>
+    <main class="app-shell phasor-shell">
+      <a class="back-link" href="index.html">↩️Quay lại</a>
+      <header class="hero phasor-hero">
+        <div class="brand-mark"><img src="icon-192.png" alt="Sơn Tùng EVN" /></div>
+        <div>
+          <p class="eyebrow">Sơn Tùng</p>
+          <h1>Tính I đối xứng ⭐</h1>
+          <p class="subtitle">Chuyển đổi Cực ↔ Thực/Ảo · Tính I0, I1, I2</p>
+        </div>
+      </header>
+
+
+      <section class="phasor-card" aria-labelledby="input-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="input-title">Nhập ba dòng pha</h2>
+            <p>Chọn một dạng nhập; công cụ tự đổi sang dạng còn lại.</p>
+          </div>
+          <div class="unit-pill">A</div>
+        </div>
+
+        <nav class="format-tabs" aria-label="Dạng biểu diễn dòng điện">
+          <button class="format-tab is-active" type="button" data-format="polar" aria-selected="true">Biên độ · Góc</button>
+          <button class="format-tab" type="button" data-format="rectangular" aria-selected="false">Thực · Ảo</button>
+        </nav>
+
+        <div id="polar-fields" class="phasor-inputs">
+          <div class="phasor-input-header"><span>Pha</span><span>Biên độ (A)</span><span>Góc (°)</span></div>
+          <label class="phasor-input-row" for="ia-mag"><strong>I<sub>A</sub></strong><input id="ia-mag" inputmode="decimal" value="10" aria-label="Biên độ dòng pha A" /><input id="ia-angle" inputmode="decimal" value="0" aria-label="Góc dòng pha A" /></label>
+          <label class="phasor-input-row" for="ib-mag"><strong>I<sub>B</sub></strong><input id="ib-mag" inputmode="decimal" value="10" aria-label="Biên độ dòng pha B" /><input id="ib-angle" inputmode="decimal" value="-120" aria-label="Góc dòng pha B" /></label>
+          <label class="phasor-input-row" for="ic-mag"><strong>I<sub>C</sub></strong><input id="ic-mag" inputmode="decimal" value="10" aria-label="Biên độ dòng pha C" /><input id="ic-angle" inputmode="decimal" value="120" aria-label="Góc dòng pha C" /></label>
+        </div>
+
+        <div id="rectangular-fields" class="phasor-inputs" hidden>
+          <div class="phasor-input-header"><span>Pha</span><span>Phần thực (A)</span><span>Phần ảo (A)</span></div>
+          <label class="phasor-input-row" for="ia-real"><strong>I<sub>A</sub></strong><input id="ia-real" inputmode="decimal" aria-label="Phần thực dòng pha A" /><input id="ia-imag" inputmode="decimal" aria-label="Phần ảo dòng pha A" /></label>
+          <label class="phasor-input-row" for="ib-real"><strong>I<sub>B</sub></strong><input id="ib-real" inputmode="decimal" aria-label="Phần thực dòng pha B" /><input id="ib-imag" inputmode="decimal" aria-label="Phần ảo dòng pha B" /></label>
+          <label class="phasor-input-row" for="ic-real"><strong>I<sub>C</sub></strong><input id="ic-real" inputmode="decimal" aria-label="Phần thực dòng pha C" /><input id="ic-imag" inputmode="decimal" aria-label="Phần ảo dòng pha C" /></label>
+        </div>
+
+        <p id="input-error" class="input-error" role="alert" hidden></p>
+        <div class="phasor-actions"><button id="balanced-button" class="button ghost" type="button">Nạp mẫu cân bằng ABC</button></div>
+      </section>
+
+      <section class="phasor-card chart-card" aria-labelledby="chart-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="chart-title">Biểu đồ vector</h2>
+            <p>Trục ngang: phần thực · Trục dọc: phần ảo.</p>
+          </div>
+        </div>
+        <nav class="format-tabs graph-tabs" aria-label="Chọn vector hiển thị">
+          <button class="format-tab is-active" type="button" data-graph="phase" aria-selected="true">I<sub>A</sub> · I<sub>B</sub> · I<sub>C</sub></button>
+          <button class="format-tab" type="button" data-graph="sequence" aria-selected="false">I<sub>0</sub> · I<sub>1</sub> · I<sub>2</sub></button>
+        </nav>
+        <canvas id="phasor-chart" role="img" aria-label="Biểu đồ vector dòng điện ba pha"></canvas>
+        <p id="chart-summary" class="chart-summary">Biểu đồ ba dòng pha.</p>
+      </section>
+
+      <section class="phasor-card" aria-labelledby="conversion-title">
+        <div class="section-heading compact-heading">
+          <div>
+            <h2 id="conversion-title">Chuyển đổi biểu diễn</h2>
+            <p>Cực: biên độ ∠ góc · Phức: phần thực + j phần ảo.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="phasor-table">
+            <thead><tr><th>Pha</th><th>Dạng cực</th><th>Dạng phức</th></tr></thead>
+            <tbody id="phase-results"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="phasor-card" aria-labelledby="sequence-title">
+        <div class="section-heading compact-heading">
+          <div>
+            <h2 id="sequence-title">Thành phần đối xứng</h2>
+            <p>I<sub>0</sub>: không · I<sub>1</sub>: thuận ABC · I<sub>2</sub>: nghịch ACB.</p>
+          </div>
+        </div>
+        <div id="sequence-results" class="sequence-results" aria-live="polite"></div>
+        <div class="formula-note">
+          <p>a = 1∠120°</p>
+          <p>I<sub>0</sub> = (I<sub>A</sub> + I<sub>B</sub> + I<sub>C</sub>) / 3</p>
+          <p>I<sub>1</sub> = (I<sub>A</sub> + aI<sub>B</sub> + a²I<sub>C</sub>) / 3</p>
+          <p>I<sub>2</sub> = (I<sub>A</sub> + a²I<sub>B</sub> + aI<sub>C</sub>) / 3</p>
+        </div>
+      </section>
+      
+    </main>
+    <script src="phasor.js"></script>
+  </body>
+</html>
