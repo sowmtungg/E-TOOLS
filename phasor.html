@@ -24,6 +24,20 @@
         </div>
       </header>
 
+      <section class="phasor-card chart-card" aria-labelledby="chart-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="chart-title">Biểu đồ vector</h2>
+            <p>Trục ngang: phần thực · Trục dọc: phần ảo.</p>
+          </div>
+        </div>
+        <nav class="format-tabs graph-tabs" aria-label="Chọn vector hiển thị">
+          <button class="format-tab is-active" type="button" data-graph="phase" aria-selected="true">I<sub>A</sub> · I<sub>B</sub> · I<sub>C</sub></button>
+          <button class="format-tab" type="button" data-graph="sequence" aria-selected="false">I<sub>0</sub> · I<sub>1</sub> · I<sub>2</sub></button>
+        </nav>
+        <canvas id="phasor-chart" role="img" aria-label="Biểu đồ vector dòng điện ba pha"></canvas>
+        <p id="chart-summary" class="chart-summary">Biểu đồ ba dòng pha.</p>
+      </section>
 
       <section class="phasor-card" aria-labelledby="input-title">
         <div class="section-heading">
@@ -55,21 +69,6 @@
 
         <p id="input-error" class="input-error" role="alert" hidden></p>
         <div class="phasor-actions"><button id="balanced-button" class="button ghost" type="button">Nạp mẫu cân bằng ABC</button></div>
-      </section>
-
-      <section class="phasor-card chart-card" aria-labelledby="chart-title">
-        <div class="section-heading">
-          <div>
-            <h2 id="chart-title">Biểu đồ vector</h2>
-            <p>Trục ngang: phần thực · Trục dọc: phần ảo.</p>
-          </div>
-        </div>
-        <nav class="format-tabs graph-tabs" aria-label="Chọn vector hiển thị">
-          <button class="format-tab is-active" type="button" data-graph="phase" aria-selected="true">I<sub>A</sub> · I<sub>B</sub> · I<sub>C</sub></button>
-          <button class="format-tab" type="button" data-graph="sequence" aria-selected="false">I<sub>0</sub> · I<sub>1</sub> · I<sub>2</sub></button>
-        </nav>
-        <canvas id="phasor-chart" role="img" aria-label="Biểu đồ vector dòng điện ba pha"></canvas>
-        <p id="chart-summary" class="chart-summary">Biểu đồ ba dòng pha.</p>
       </section>
 
       <section class="phasor-card" aria-labelledby="conversion-title">
