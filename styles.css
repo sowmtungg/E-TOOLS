@@ -9,11 +9,11 @@
   --brand-dark: #073950;
   --brand-bright: #1f8fc0;
   --teal: #6fa8a3;
-  --glass: rgba(255, 255, 255, 0.89);
-  --glass-strong: rgba(188, 202, 223, 0.973);
+  --glass: rgba(243, 237, 237, 0.774);
+  --glass-strong: rgba(28, 30, 32, 0.973);
   --glass-soft: rgba(255, 255, 255, 0.34);
   --glass-border: rgb(10, 10, 10);
-  --glass-shadow: 0 12px 34px rgba(9, 46, 66, 0.14), 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  --glass-shadow: 0 12px 34px rgba(9, 46, 66, 0.14), 0 1px 0 rgba(92, 87, 87, 0.6) inset;
   --ok-bg: rgba(7, 167, 119, 0.16);
   --ok: #077a56;
   --warn-bg: rgba(190, 111, 0, 0.16);
